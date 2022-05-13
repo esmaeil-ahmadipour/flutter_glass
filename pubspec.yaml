@@ -1,11 +1,11 @@
 name: flutter_glass
 description: A flutter package that adds the possibility of making glass containers to your app.
-version: 0.0.2
+version: 0.0.3
 repository: https://github.com/esmaeil-ahmadipour/flutter_glass
 homepage: https://github.com/esmaeil-ahmadipour/flutter_glass
 
 environment:
-  sdk: ">=2.16.2 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
