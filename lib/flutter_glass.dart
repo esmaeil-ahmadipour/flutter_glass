@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 class GlassContainer extends StatelessWidget {
   const GlassContainer({
     Key? key,
-    required this.cardWidth,
-    required this.cardHeight,
+    required this.width,
+    required this.height,
     required this.children,
     this.borderRadius = 16.0,
     this.borderWidth = 1.5,
@@ -18,17 +18,41 @@ class GlassContainer extends StatelessWidget {
     this.sigmaX = 20.0,
     this.sigmaY = 20.0,
   }) : super(key: key);
-  final double cardWidth;
-  final double cardHeight;
+
+  /// [width] , this property is REQUIRED & used for width of glass container .
+  final double width;
+
+  /// [height] , this property is REQUIRED & used for height of glass container .
+  final double height;
+
+  /// [borderRadius] , this property used for rounded corners in glass container .
   final double borderRadius;
+
+  /// [borderWidth] , this property set size for border around of glass container .
   final double borderWidth;
+
+  /// [mainColor] , this property used for background color of glass container & border of this widget  (this color used in widget , by opacity 0.2) .
   final Color mainColor;
+
+  /// [shadowColor] , this property set color of shadow in boxShadow (this color used in widget , by opacity 0.1) .
   final Color shadowColor;
+  
+  /// [innerPadding] , this property set padding to inside of  glass container .
   final EdgeInsetsGeometry innerPadding;
+
+  /// [outerPadding] , this property set padding to outside of  glass container .
   final EdgeInsetsGeometry outerPadding;
+  
+  /// [children] , this property is REQUIRED & hold content in glass container .
   final List<Widget> children;
+
+  /// [blurRadius] , this property used for rounded corners in boxShadow .
   final double blurRadius;
+
+  /// [spreadRadius] , this property used for shadow impact width in boxShadow .
   final double spreadRadius;
+
+  /// [sigmaX] and [sigmaY] : Users can set amount of blurring in X and Y directions for increasing the blurring of the background .
   final double sigmaX;
   final double sigmaY;
 
@@ -52,8 +76,8 @@ class GlassContainer extends StatelessWidget {
               sigmaY: sigmaY,
             ),
             child: Container(
-                width: cardWidth,
-                height: cardHeight,
+                width: width,
+                height: height,
                 decoration: BoxDecoration(
                     color: mainColor.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(borderRadius),
@@ -70,6 +94,67 @@ class GlassContainer extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class GradiantContainer extends StatelessWidget {
+  const GradiantContainer({
+    Key? key,
+    required this.child,
+    this.colors = const [
+      Colors.deepPurple,
+      Colors.pink,
+      Colors.red,
+      Colors.orange,
+    ],
+    this.begin = Alignment.topCenter,
+    this.end = Alignment.bottomCenter,
+  }): assert(!(colors.length == 0), /// use colors parameter in optional but send empty color list is forbidden .
+  "error on colors parameter, this parameter isEmpty."
+      "use colors parameter in optional but send empty color list is forbidden ."),
+        super(key: key);
+
+  /// [child] , this property is REQUIRED & used for foreground widget on the gradiant widget .
+  final Widget child;
+
+  /// [begin] , this property used for start gradiant location .
+  final AlignmentGeometry begin;
+
+  /// [end] , this property used for end gradiant location .
+  final AlignmentGeometry end;
+
+  /// [colors] , this property list of colors used in gradiant .
+  final List<Color> colors;
+
+  @override
+  Widget build(BuildContext context) {
+
+    /// [stops] contain height of colors used in gradiant widget and
+    /// we set equal height size for all used colors .
+    List<double> stops = [];
+    for (var i = 0; i < colors.length; ++i) {
+      stops.add((1.0 / (colors.length + 1)) * (i + 1));
+    }
+
+    return Container(
+      height: MediaQuery
+          .of(context)
+          .size
+          .height,
+      width: MediaQuery
+          .of(context)
+          .size
+          .width,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: colors,
+          begin:begin,
+          end: end,
+          stops: stops,
+        ),
+      ),
+      child: child,
     );
   }
 }
