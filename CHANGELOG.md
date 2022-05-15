@@ -6,3 +6,6 @@
 
 ## 0.0.3
 * improving example
+
+## 0.0.4
+* add background image for glass container

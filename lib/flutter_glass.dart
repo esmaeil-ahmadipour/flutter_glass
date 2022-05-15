@@ -15,8 +15,9 @@ class GlassContainer extends StatelessWidget {
     this.outerPadding = const EdgeInsets.all(8.0),
     this.blurRadius = 16.0,
     this.spreadRadius = 16.0,
-    this.sigmaX = 20.0,
-    this.sigmaY = 20.0,
+    this.sigmaX = 10.0,
+    this.sigmaY = 10.0,
+    this.decorationImage,
   }) : super(key: key);
 
   /// [width] , this property is REQUIRED & used for width of glass container .
@@ -36,13 +37,13 @@ class GlassContainer extends StatelessWidget {
 
   /// [shadowColor] , this property set color of shadow in boxShadow (this color used in widget , by opacity 0.1) .
   final Color shadowColor;
-  
+
   /// [innerPadding] , this property set padding to inside of  glass container .
   final EdgeInsetsGeometry innerPadding;
 
   /// [outerPadding] , this property set padding to outside of  glass container .
   final EdgeInsetsGeometry outerPadding;
-  
+
   /// [children] , this property is REQUIRED & hold content in glass container .
   final List<Widget> children;
 
@@ -51,6 +52,9 @@ class GlassContainer extends StatelessWidget {
 
   /// [spreadRadius] , this property used for shadow impact width in boxShadow .
   final double spreadRadius;
+
+  /// [decorationImage] , this property set background image for glass container .
+  final DecorationImage? decorationImage;
 
   /// [sigmaX] and [sigmaY] : Users can set amount of blurring in X and Y directions for increasing the blurring of the background .
   final double sigmaX;
@@ -61,13 +65,17 @@ class GlassContainer extends StatelessWidget {
     return Padding(
       padding: outerPadding,
       child: Container(
-        decoration: BoxDecoration(boxShadow: [
-          BoxShadow(
-            blurRadius: blurRadius,
-            spreadRadius: spreadRadius,
-            color: shadowColor.withOpacity(0.1),
-          )
-        ]),
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              blurRadius: blurRadius,
+              spreadRadius: spreadRadius,
+              color: shadowColor.withOpacity(0.1),
+            )
+          ],
+          image: decorationImage,
+          borderRadius: BorderRadius.circular(borderRadius),
+        ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(borderRadius),
           child: BackdropFilter(
@@ -110,9 +118,12 @@ class GradiantContainer extends StatelessWidget {
     ],
     this.begin = Alignment.topCenter,
     this.end = Alignment.bottomCenter,
-  }): assert(!(colors.length == 0), /// use colors parameter in optional but send empty color list is forbidden .
-  "error on colors parameter, this parameter isEmpty."
-      "use colors parameter in optional but send empty color list is forbidden ."),
+  })  : assert(
+            !(colors.length == 0),
+
+            /// use colors parameter in optional but send empty color list is forbidden .
+            "error on colors parameter, this parameter isEmpty."
+            "use colors parameter in optional but send empty color list is forbidden ."),
         super(key: key);
 
   /// [child] , this property is REQUIRED & used for foreground widget on the gradiant widget .
@@ -129,7 +140,6 @@ class GradiantContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     /// [stops] contain height of colors used in gradiant widget and
     /// we set equal height size for all used colors .
     List<double> stops = [];
@@ -138,18 +148,12 @@ class GradiantContainer extends StatelessWidget {
     }
 
     return Container(
-      height: MediaQuery
-          .of(context)
-          .size
-          .height,
-      width: MediaQuery
-          .of(context)
-          .size
-          .width,
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: colors,
-          begin:begin,
+          begin: begin,
           end: end,
           stops: stops,
         ),

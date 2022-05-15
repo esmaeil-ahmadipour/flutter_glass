@@ -47,6 +47,18 @@ class _HomepageState extends State<Homepage> {
                   // from here, set glass widget.
                   height: 200,
                   width: 360,
+                  /*
+                  // for using [decorationImage] , better is reduce blur on image , recommended set values of sigmaX & sigmaX on 0.0 .
+                  sigmaX: 0,
+                  sigmaY: 0,
+                  decorationImage: const DecorationImage(
+                      // in here, set your image for background  of glass widget.
+                      // you can use AssetImage , NetworkImage or CachedNetworkImageProvider .
+                  image: NetworkImage("http://via.placeholder.com/200x150"),
+                      fit: BoxFit.fill,
+                      // you can set manually opacity for background image .
+                      opacity: 0.2),
+                  */
                   children: [
                     // in here, put your widgets in glass widget.
                     CardContent(

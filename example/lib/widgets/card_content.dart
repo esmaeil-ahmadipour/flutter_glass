@@ -10,7 +10,7 @@ class CardContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return     Expanded(
+    return Expanded(
       child: Column(
         children: [
           Row(
@@ -21,18 +21,19 @@ class CardContent extends StatelessWidget {
               SizedBox(
                   width: 48,
                   height: 48,
-                  child:
-                  Icon(Icons.payment, color: Colors.white.withOpacity(0.75))),
+                  child: Icon(Icons.payment,
+                      color: Colors.white.withOpacity(0.75))),
             ],
           ),
           const Spacer(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(cardModel.name, style: TextStyle(color: Colors.white.withOpacity(0.75))),
+              Text(cardModel.name,
+                  style: TextStyle(color: Colors.white.withOpacity(0.75))),
               Text(
                   'Date: '
-                      '${cardModel.date}',
+                  '${cardModel.date}',
                   style: TextStyle(color: Colors.white.withOpacity(0.75))),
             ],
           ),
@@ -46,7 +47,7 @@ class CardContent extends StatelessWidget {
                   style: TextStyle(color: Colors.white.withOpacity(0.75))),
               Text(
                   'CVV2: '
-                      '${cardModel.cvv2}',
+                  '${cardModel.cvv2}',
                   style: TextStyle(color: Colors.white.withOpacity(0.75))),
             ],
           ),
