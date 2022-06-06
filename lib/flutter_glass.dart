@@ -5,7 +5,7 @@ class GlassContainer extends StatelessWidget {
   const GlassContainer({
     Key? key,
     required this.width,
-    required this.height,
+    this.height,
     required this.children,
     this.borderRadius = 16.0,
     this.borderWidth = 1.5,
@@ -18,13 +18,15 @@ class GlassContainer extends StatelessWidget {
     this.sigmaX = 10.0,
     this.sigmaY = 10.0,
     this.decorationImage,
+    this.shadowOpacity = 0.1,
+    this.mainColorOpacity = 0.2,
   }) : super(key: key);
 
   /// [width] , this property is REQUIRED & used for width of glass container .
   final double width;
 
-  /// [height] , this property is REQUIRED & used for height of glass container .
-  final double height;
+  /// [height] , this property used for height of glass container .
+  final double? height;
 
   /// [borderRadius] , this property used for rounded corners in glass container .
   final double borderRadius;
@@ -56,9 +58,17 @@ class GlassContainer extends StatelessWidget {
   /// [decorationImage] , this property set background image for glass container .
   final DecorationImage? decorationImage;
 
-  /// [sigmaX] and [sigmaY] : Users can set amount of blurring in X and Y directions for increasing the blurring of the background .
+  /// [sigmaX] : Users can set amount of blurring in X directions for increasing the blurring of the background .
   final double sigmaX;
+
+  /// [sigmaY]  : Users can set amount of blurring in Y directions for increasing the blurring of the background .
   final double sigmaY;
+
+  /// [shadowOpacity]  : this property used when users need set shadow Opacity  for outer of glass container.
+  final double shadowOpacity;
+
+  /// [mainColorOpacity]  : this property used when users need set Opacity on mainColor of glass container.
+  final double mainColorOpacity;
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +80,7 @@ class GlassContainer extends StatelessWidget {
             BoxShadow(
               blurRadius: blurRadius,
               spreadRadius: spreadRadius,
-              color: shadowColor.withOpacity(0.1),
+              color: shadowColor.withOpacity(shadowOpacity),
             )
           ],
           image: decorationImage,
@@ -79,27 +89,34 @@ class GlassContainer extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(borderRadius),
           child: BackdropFilter(
-            filter: ImageFilter.blur(
-              sigmaX: sigmaX,
-              sigmaY: sigmaY,
-            ),
-            child: Container(
-                width: width,
-                height: height,
-                decoration: BoxDecoration(
-                    color: mainColor.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(borderRadius),
-                    border: Border.all(
-                      width: borderWidth,
-                      color: mainColor.withOpacity(0.2),
-                    )),
-                child: Padding(
-                  padding: innerPadding,
-                  child: Column(
-                    children: children,
+              filter: ImageFilter.blur(
+                sigmaX: sigmaX,
+                sigmaY: sigmaY,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(
+                    child: Container(
+                        width: width,
+                        height: height,
+                        decoration: BoxDecoration(
+                          color: mainColor.withOpacity(mainColorOpacity),
+                          borderRadius: BorderRadius.circular(borderRadius),
+                          border: Border.all(
+                            width: borderWidth,
+                            color: mainColor.withOpacity(mainColorOpacity),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: innerPadding,
+                          child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: children),
+                        )),
                   ),
-                )),
-          ),
+                ],
+              )),
         ),
       ),
     );
