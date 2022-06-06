@@ -11,7 +11,7 @@ To use this plugin, add flutter_glass in your `pubspec.yaml`
 
 ```
 dependencies:
-  flutter_glass: ^0.0.4
+  flutter_glass: ^0.0.6
 ```
 
 Or install automatically using this command
