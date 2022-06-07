@@ -1,13 +1,12 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-
+/// [GlassContainer] this class is main widget of this package and handle and manage all ui elements.
 class GlassContainer extends StatelessWidget {
   const GlassContainer({
     Key? key,
     required this.width,
     this.height,
     required this.children,
-    this.borderRadius = 16.0,
     this.borderWidth = 1.5,
     this.mainColor = Colors.white,
     this.shadowColor = Colors.black,
@@ -20,6 +19,7 @@ class GlassContainer extends StatelessWidget {
     this.decorationImage,
     this.shadowOpacity = 0.1,
     this.mainColorOpacity = 0.2,
+    this.borderRadius = const GlassBorderSide(bottomSide: 16.0, topSide: 16.0),
   }) : super(key: key);
 
   /// [width] , this property is REQUIRED & used for width of glass container .
@@ -29,7 +29,7 @@ class GlassContainer extends StatelessWidget {
   final double? height;
 
   /// [borderRadius] , this property used for rounded corners in glass container .
-  final double borderRadius;
+  final GlassBorderSide borderRadius;
 
   /// [borderWidth] , this property set size for border around of glass container .
   final double borderWidth;
@@ -84,10 +84,20 @@ class GlassContainer extends StatelessWidget {
             )
           ],
           image: decorationImage,
-          borderRadius: BorderRadius.circular(borderRadius),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(borderRadius.bottomSide),
+            bottomRight: Radius.circular(borderRadius.bottomSide),
+            topLeft: Radius.circular(borderRadius.topSide),
+            topRight: Radius.circular(borderRadius.topSide),
+          ),
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(borderRadius),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(borderRadius.bottomSide),
+            bottomRight: Radius.circular(borderRadius.bottomSide),
+            topLeft: Radius.circular(borderRadius.topSide),
+            topRight: Radius.circular(borderRadius.topSide),
+          ),
           child: BackdropFilter(
               filter: ImageFilter.blur(
                 sigmaX: sigmaX,
@@ -102,7 +112,12 @@ class GlassContainer extends StatelessWidget {
                         height: height,
                         decoration: BoxDecoration(
                           color: mainColor.withOpacity(mainColorOpacity),
-                          borderRadius: BorderRadius.circular(borderRadius),
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(borderRadius.bottomSide),
+                            bottomRight: Radius.circular(borderRadius.bottomSide),
+                            topLeft: Radius.circular(borderRadius.topSide),
+                            topRight: Radius.circular(borderRadius.topSide),
+                          ),
                           border: Border.all(
                             width: borderWidth,
                             color: mainColor.withOpacity(mainColorOpacity),
@@ -122,7 +137,7 @@ class GlassContainer extends StatelessWidget {
     );
   }
 }
-
+/// [GradiantContainer] this class used  for gradiant background of glass container.
 class GradiantContainer extends StatelessWidget {
   const GradiantContainer({
     Key? key,
@@ -178,4 +193,14 @@ class GradiantContainer extends StatelessWidget {
       child: child,
     );
   }
+}
+
+/// [GlassBorderSide] this class used for rounded border of image and glass container.
+class GlassBorderSide {
+  /// [topSide]  , used for rounded border of top side of image and glass container
+  final double topSide;
+  /// [bottomSide]  , used for rounded border of top side of image and glass container
+  final double bottomSide;
+
+  const GlassBorderSide({this.topSide = 16.0, this.bottomSide = 16.0});
 }

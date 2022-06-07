@@ -15,3 +15,6 @@
 
 ## 0.0.6
 * set opacity for glass container
+
+## 0.0.7
+* update borderRadius parameter with new object (GlassBorderSide)
