@@ -18,3 +18,6 @@
 
 ## 0.0.7
 * update borderRadius parameter with new object (GlassBorderSide)
+
+## 0.0.8
+* width of glass container removed from required parameters.

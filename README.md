@@ -1,9 +1,9 @@
-![Screenshot](https://github.com/esmaeil-ahmadipour/flutter_glass/blob/master/img/banner.png?raw=true "Flutter Glass Banner")
+![Screenshot](https://github.com/esmaeil-ahmadipour/esmaeil-ahmadipour/blob/main/upload/packages/flutter_glass/banner.png?raw=true "Flutter Glass Banner")
 # Flutter Glass plugin
 
 A flutter package that adds the possibility of making glass containers to your app.
 
-![Screenshot](https://github.com/esmaeil-ahmadipour/flutter_glass/blob/master/img/flutter_glass.gif?raw=true "Flutter Glass Demo")
+![Screenshot](https://github.com/esmaeil-ahmadipour/esmaeil-ahmadipour/blob/main/upload/packages/flutter_glass/preview.gif?raw=true "Flutter Glass Demo")
 
 ### Installation
 
@@ -11,7 +11,7 @@ To use this plugin, add flutter_glass in your `pubspec.yaml`
 
 ```
 dependencies:
-  flutter_glass: ^0.0.7
+  flutter_glass: ^0.0.8
 ```
 
 Or install automatically using this command
@@ -27,11 +27,12 @@ import 'package:flutter_glass/flutter_glass.dart';
 
 ...
     GlassContainer(
-      height: 200,
-      width: 360,
-      children: [
-        Text("Sample Text"),
-      ],
+        children: [
+            Padding(
+                padding: const EdgeInsets.all(48.0),
+                child: Text("Sample Text"),
+            ),
+        ],
     ),
 ...
 ```

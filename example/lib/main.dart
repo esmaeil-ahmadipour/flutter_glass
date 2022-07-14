@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Flutter Glass',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -24,14 +24,9 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Homepage extends StatefulWidget {
+class Homepage extends StatelessWidget {
   const Homepage({Key? key}) : super(key: key);
 
-  @override
-  _HomepageState createState() => _HomepageState();
-}
-
-class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,31 +37,27 @@ class _HomepageState extends State<Homepage> {
               // in here, used utility & pretty widget (for set background gradiant).
               child: ListViewBody(
             children: [
-              for (var i = 10; i > 0; --i)
+              for (var i = 9; i > 0; --i)
                 GlassContainer(
                   // from here, set glass widget.
-                  height: 200,
-                  width: 360,
-                  /*
                   // for using [decorationImage] , better is reduce blur on image , recommended set values of sigmaX & sigmaX on 0.0 .
                   sigmaX: 0,
                   sigmaY: 0,
                   decorationImage: const DecorationImage(
                       // in here, set your image for background  of glass widget.
                       // you can use AssetImage , NetworkImage or CachedNetworkImageProvider .
-                  image: NetworkImage("http://via.placeholder.com/200x150"),
+                      image: NetworkImage("http://via.placeholder.com/200x150"),
                       fit: BoxFit.fill,
                       // you can set manually opacity for background image .
                       opacity: 0.2),
-                  */
                   children: [
                     // in here, put your widgets in glass widget.
                     CardContent(
                       cardModel: CardModel(
-                        cNumber: "0000 1241 3698 7845",
+                        cNumber: "6${i}00 1241 3698 7845",
                         name: "User $i",
                         cvv2: "$i" "45",
-                        date: "08/01",
+                        date: "2022/0$i",
                       ),
                     ),
                   ],

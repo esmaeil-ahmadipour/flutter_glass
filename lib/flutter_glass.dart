@@ -1,10 +1,11 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+
 /// [GlassContainer] this class is main widget of this package and handle and manage all ui elements.
 class GlassContainer extends StatelessWidget {
   const GlassContainer({
     Key? key,
-    required this.width,
+    this.width,
     this.height,
     required this.children,
     this.borderWidth = 1.5,
@@ -22,8 +23,8 @@ class GlassContainer extends StatelessWidget {
     this.borderRadius = const GlassBorderSide(bottomSide: 16.0, topSide: 16.0),
   }) : super(key: key);
 
-  /// [width] , this property is REQUIRED & used for width of glass container .
-  final double width;
+  /// [width] , this property used for width of glass container .
+  final double? width;
 
   /// [height] , this property used for height of glass container .
   final double? height;
@@ -113,8 +114,10 @@ class GlassContainer extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: mainColor.withOpacity(mainColorOpacity),
                           borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(borderRadius.bottomSide),
-                            bottomRight: Radius.circular(borderRadius.bottomSide),
+                            bottomLeft:
+                                Radius.circular(borderRadius.bottomSide),
+                            bottomRight:
+                                Radius.circular(borderRadius.bottomSide),
                             topLeft: Radius.circular(borderRadius.topSide),
                             topRight: Radius.circular(borderRadius.topSide),
                           ),
@@ -137,6 +140,7 @@ class GlassContainer extends StatelessWidget {
     );
   }
 }
+
 /// [GradiantContainer] this class used  for gradiant background of glass container.
 class GradiantContainer extends StatelessWidget {
   const GradiantContainer({
@@ -199,6 +203,7 @@ class GradiantContainer extends StatelessWidget {
 class GlassBorderSide {
   /// [topSide]  , used for rounded border of top side of image and glass container
   final double topSide;
+
   /// [bottomSide]  , used for rounded border of top side of image and glass container
   final double bottomSide;
 
